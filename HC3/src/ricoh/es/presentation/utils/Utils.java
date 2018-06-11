@@ -1,18 +1,24 @@
 package ricoh.es.presentation.utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -50,6 +56,9 @@ public class Utils extends Constants{
 			driver.close();
 		}
 	}
+
+	
+	
 	public static boolean elementExist(WebDriverWait wait, By by) {	
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -136,6 +145,29 @@ public class Utils extends Constants{
 		} finally {
 			acceptNextAlert = true;
 		}
+	}
+	public static void createScreenshot(WebDriver driver,String testName,String imageName) {
+		
+		waitingTime(500);
+		
+	    String imagesLocation;
+	    String filename;
+
+        imagesLocation = (new File("")).getAbsolutePath().concat("\\screenShot\\");
+        filename = imagesLocation +  testName +"\\"+imageName + ".jpg";
+
+        File newFile = new File(imagesLocation);
+        newFile.mkdirs(); // Insure directory is there
+        
+        try {
+            WebDriver augmentedDriver = new Augmenter().augment(driver);
+            File scrFile = ((TakesScreenshot)augmentedDriver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(scrFile, new File(filename).getAbsoluteFile(), true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

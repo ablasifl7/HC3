@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="GOB">
-	<parameter name="browser" value="firefox"/><!-- firefox, chrome, ie -->
+	<parameter name="browser" value="chrome"/><!-- firefox, chrome, ie -->
 	<parameter name="url" value="https://lpscwai01.localdomain/HC3-GOV/gov"/>
 
   <test thread-count="5" name="TestCase 1">
    	  	<parameter name="user" value="ROQUE"/>
    	  	<parameter name="password" value="EVERIS_12"/>
-   	  	<parameter name="date" value="07/06/2018"/>
-   	  	<parameter name="hour" value="15"/>
+   	  	<parameter name="date" value="11/06/2018"/>
+   	  	<parameter name="hour" value="09"/>
    	  	<parameter name="minute" value=""/>
    	  	<parameter name="menu" value="INDICADORS"/>
    	  	<parameter name="submenu1" value="Indicador servei web"/>
@@ -22,7 +22,7 @@
         </run>
       	</groups>
     	<classes>
-      		<class name="ricoh.es.presentation.ScreenValidation"/>
+      		<class name="ricoh.es.presentation.GOB_ScreenValidation"/>
     	</classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
