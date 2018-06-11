@@ -1,0 +1,85 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+
+### Migracion SALUT #####
+##Templates
+192.168.200.14    __template-oracle-11.2.0.4-sid-hccc
+192.168.200.15    __template-oracle-11.2.0.4-sid-sahdox01
+
+##Tools
+#Alfresco
+192.168.200.53 hc3ecm42-dev.localdomain hc3ecm42-dev HC3A    ic-server.localdomain    ic-server
+#GSO
+192.168.200.50 hc3gso-xp
+#Admin
+192.168.200.101 __admin-win.localdomain __admin-win
+
+##BBDD
+192.168.200.16    lpscdox00.localdomain    lpscdox00    
+192.168.200.17    lpscdox20.localdomain    lpscdox20    
+192.168.200.24    lpscdot00.localdomain    lpscdot00    
+192.168.200.25    lpscdot20.localdomain    lpscdot20    
+192.168.200.27    lpscdoi00.localdomain    lpscdoi00    
+192.168.200.28    lpscdoi20.localdomain    lpscdoi20    
+
+### WLS
+192.168.200.19    lpscswx20.localdomain    lpscswx20    
+192.168.200.20    lpscswx21.localdomain    lpscswx21    
+192.168.200.22    lpscswi20.localdomain    lpscswi20    
+192.168.200.26    lpscswt20.localdomain    lpscswt20    
+
+### APACHES
+192.168.200.31    lpscwai01.localdomain    lpscwai01    
+192.168.200.32    lpscwax01.localdomain    lpscwax01    
+192.168.200.33    lpscwat01.localdomain    lpscwat01    
+
+###LDAP
+192.168.200.38    lpscslx00.localdomain    lpscslx00
+
+##RSA
+192.168.200.18    rsa-oracle.localdomain    rsa-oracle    
+192.168.200.29    rsa-oas-tst.localdomain    rsa-oas-tst    
+192.168.200.30    rsa-bea-tst.localdomain    rsa-bea-tst    
+192.168.200.35    rsa-oas-val.localdomain    rsa-oas-val
+192.168.200.34    rsa-bea-val.localdomain    rsa-bea-val    
+192.168.200.37    rsa-oas-sta.localdomain    rsa-oas-sta
+192.168.200.36    rsa-bea-sta.localdomain    rsa-bea-sta        
+
+## LMS 
+###  Weblogic 10.3.6
+192.168.200.51 hc3wls36-dev.localdomain hc3wls36-dev
+192.168.200.52 hc3httpd-single.localdomain hc3httpd-single
+
+### Cluster Weblogic 10.3.6
+192.168.200.56 hc3wls36-node01.localdomain hc3wls36-node01
+192.168.200.55 hc3wls36-node02.localdomain hc3wls36-node02
+192.168.200.54 hc3httpd-cluster.localdomain hc3httpd-cluster
+
+##SEM
+192.168.200.58 sem-oracle10g.localdomain sem-oracle10g
+
+###Entorno servidor de aplicaciones salut (MAC/CCL)
+192.168.200.61  lpscswi01.localdomain lpscswi01
+192.168.200.62  lpscswt02.localdomain lpscswt02
+192.168.200.63  lpscswx03.localdomain lpscswx03
+
+### Migracion SALUT #####

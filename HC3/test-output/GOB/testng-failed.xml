@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [GOB]">
+  <parameter name="date" value="07/06/2018"/>
+  <parameter name="password" value="EVERIS_12"/>
+  <parameter name="hour" value="15"/>
+  <parameter name="browser" value="firefox"/>
+  <parameter name="submenu1" value="Indicador servei web"/>
+  <parameter name="submenu2" value="Indicador visor professional"/>
+  <parameter name="menu" value="INDICADORS"/>
+  <parameter name="user" value="ROQUE"/>
+  <parameter name="url" value="https://lpscwai01.localdomain/HC3-GOV/gov"/>
+  <parameter name="submenu3" value="Indicador visor ciutadà"/>
+  <parameter name="minute" value=""/>
+  <parameter name="submenu4" value="Indicador publicació"/>
+  <test name="TestCase 1(failed)">
+    <parameter name="date" value="07/06/2018"/>
+    <parameter name="password" value="EVERIS_12"/>
+    <parameter name="hour" value="15"/>
+    <parameter name="submenu1" value="Indicador servei web"/>
+    <parameter name="submenu2" value="Indicador visor professional"/>
+    <parameter name="menu" value="INDICADORS"/>
+    <parameter name="user" value="ROQUE"/>
+    <parameter name="submenu3" value="Indicador visor ciutadà"/>
+    <parameter name="minute" value=""/>
+    <parameter name="submenu4" value="Indicador publicació"/>
+    <groups>
+      <run>
+        <include name="Validación pantalla"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="ricoh.es.presentation.ScreenValidation">
+        <methods>
+          <include name="testCase1" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- ricoh.es.presentation.ScreenValidation -->
+    </classes>
+  </test> <!-- TestCase 1(failed) -->
+</suite> <!-- Failed suite [GOB] -->

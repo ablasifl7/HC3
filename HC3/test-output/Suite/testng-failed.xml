@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <parameter name="emails" value="Agusti.Blasi@ricoh.es"/>
+  <parameter name="passwords" value="Abf.600935214"/>
+  <parameter name="browser" value="firefox"/>
+  <parameter name="url" value="https://ricoh-spain-it-services.atlassian.net/"/>
+  <test name="TestCase 1(failed)">
+    <parameter name="emails" value="Agusti.Blasi@ricoh.es"/>
+    <parameter name="passwords" value="Abf.600935214"/>
+    <groups>
+      <run>
+        <include name="TC1"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="ricoh.es.presentation.TestCase1">
+        <methods>
+          <include name="testCase1" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- ricoh.es.presentation.TestCase1 -->
+    </classes>
+  </test> <!-- TestCase 1(failed) -->
+</suite> <!-- Failed suite [Suite] -->

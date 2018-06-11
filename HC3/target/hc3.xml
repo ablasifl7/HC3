@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="GOB">
+	<parameter name="browser" value="firefox"/><!-- firefox, chrome, ie -->
+	<parameter name="url" value="https://lpscwai01.localdomain/HC3-GOV/gov"/>
+
+  <test thread-count="5" name="TestCase 1">
+   	  	<parameter name="user" value="ROQUE"/>
+   	  	<parameter name="password" value="EVERIS_12"/>
+   	  	<parameter name="date" value="07/06/2018"/>
+   	  	<parameter name="hour" value="15"/>
+   	  	<parameter name="minute" value=""/>
+   	  	<parameter name="menu" value="INDICADORS"/>
+   	  	<parameter name="submenu1" value="Indicador servei web"/>
+   	  	<parameter name="submenu2" value="Indicador visor professional"/>
+   	  	<parameter name="submenu3" value="Indicador visor ciutadà"/>
+   	  	<parameter name="submenu4" value="Indicador publicació"/>
+   	  	<groups>
+        <run>
+            <!-- exclude name = "Validación pantalla" / -->
+            <include name = "Validación pantalla" />
+        </run>
+      	</groups>
+    	<classes>
+      		<class name="ricoh.es.presentation.ScreenValidation"/>
+    	</classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
