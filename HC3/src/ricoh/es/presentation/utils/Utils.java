@@ -26,7 +26,7 @@ public class Utils extends Constants{
 	public static WebDriverWait setUp(WebDriver driver,String url) {
 		driver.get(url);
 		driver.manage().window().maximize();
-		ricoh.es.domain.HostCheck.file(driver);
+		//ricoh.es.domain.HostCheck.file(driver);
 		return new WebDriverWait(driver, TimeOut);
 	}
 	
@@ -59,23 +59,6 @@ public class Utils extends Constants{
 
 	
 	
-	public static boolean elementExist(WebDriverWait wait, By by) {	
-		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-			return true;
-		} catch(TimeoutException e) {
-			return false;
-		}
-	}
-	public static boolean elementExist(WebDriver driver, By by) {	
-		try {
-			return driver.findElement(by).isDisplayed();
-		} catch(TimeoutException e) {
-			return false;
-		}
-	}
-	
-	
 	public static void waitingTime(long miliseconds) {
 		try {
 			Thread.sleep(miliseconds);
@@ -92,28 +75,6 @@ public class Utils extends Constants{
         return sdf.format(cal.getTime());
 	}
 	
-	
-	public static void addTextToField(WebDriverWait wait,By by,String text) {
-		WebElement element = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(by));
-
-		element.clear();
-		element.sendKeys(text);
-
-		
-
-	}
-	public static void clickElement(WebDriverWait wait,By by) {
-		WebElement element = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(by));
-		element.click();
-	}
-	public static String displayText(WebDriverWait wait,By by) {
-		WebElement element = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(by));
-		return element.getText();
-	}
-
 	public static boolean isElementPresent(WebDriver driver, By by) {
 		try {
 			driver.findElement(by);

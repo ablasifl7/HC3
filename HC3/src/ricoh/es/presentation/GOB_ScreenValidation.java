@@ -1,13 +1,10 @@
 package ricoh.es.presentation;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -58,46 +55,25 @@ public class GOB_ScreenValidation extends Utils {
 		return ob;
 	}
 	
-  @Test(dataProvider = "dp",groups = { "Validación pantalla" })
-	public void testCase1(String date, String hour, String minute) {
+  @Test(dataProvider = "dp",groups = { "Validación pantalla","GOB" })
+	public void screenValidation(String date, String hour, String minute) {
 		WebDriver driver = openBrowser(this.browser);
 		try {
 	
 			WebDriverWait wait = setUp(driver,this.url);
 			// Step 1:
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("txtUsuari")));
-			element.clear();
-			element.sendKeys(this.user);
-			
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("txtPassword")));
-			element.clear();
-			element.sendKeys(this.password);
-			
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ibtnEnviar")));
-			element.click();
-			
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.menu)));
-			
-			Assert.assertTrue(element.isDisplayed());
+			ricoh.es.domain.Login.submit(wait, this.user, this.password);
+	
+			element = ricoh.es.domain.Menu.checkMenu(wait, this.menu);
 			
 			// Step 2:	
 			element.click();
 
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.submenu1)));
-			Assert.assertTrue(element.isDisplayed());
-			
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.submenu2)));
-			Assert.assertTrue(element.isDisplayed());
-			
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.submenu3)));
-			Assert.assertTrue(element.isDisplayed());
-			
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.submenu4)));
-			Assert.assertTrue(element.isDisplayed());
+			ricoh.es.domain.Menu.checkSubmenu(wait, new String[] {this.submenu1,this.submenu2,this.submenu3,this.submenu4});
 	
-
-		  
+			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("frmFrame")));
 			// Step 3:	
+
 			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.submenu1)));
 			element.click();
 			
@@ -108,31 +84,22 @@ public class GOB_ScreenValidation extends Utils {
 			driver.get(element.getAttribute("src"));
 
 			// Step 4:
-		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dataFrom")));
-			Assert.assertTrue(element.isEnabled());
-			element.clear();
-			element.sendKeys(date);
+			ricoh.es.domain.Filter.setAndCheck(wait, date, hour, minute);
 			
-		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("horaFrom")));
-			Assert.assertTrue(element.isEnabled());
-			element.clear();
-			element.sendKeys(hour);
-			
-		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("minFrom")));
-			Assert.assertTrue(element.isEnabled());
-			element.clear();
-			element.sendKeys(minute);
-			
+
+			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"control1\"]/div/div/div")));
 			String testName = "graphyc_before_"+"aria-disabled="+element.getAttribute("aria-disabled")+"_"+date.replace("/", "")+"_"+hour;
 			Utils.createScreenshot(driver,TESTNAME,testName);
 			
 			// Step 5:
 		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ibtFiltra")));
 		    element.click();
-
+		    
+		    
+		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("control1")));
+	
 			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"control1\"]/div/div/div")));
 
-			
 			testName = "graphyc_after_"+"aria-disabled="+element.getAttribute("aria-disabled")+"_"+date.replace("/", "")+"_"+hour;
 			Utils.createScreenshot(driver,TESTNAME,testName);
 	
