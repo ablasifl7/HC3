@@ -75,6 +75,15 @@ public class Utils extends Constants{
         return sdf.format(cal.getTime());
 	}
 	
+	public static String  currentTime(String format) {
+		//example: 'yyyy-MM-dd HH:mm:ss.SSS'
+		Calendar cal = null;
+		SimpleDateFormat sdf = null;
+		cal = Calendar.getInstance();
+        sdf = new SimpleDateFormat(format);
+        return sdf.format(cal.getTime());
+	}
+	
 	public static boolean isElementPresent(WebDriver driver, By by) {
 		try {
 			driver.findElement(by);
@@ -107,8 +116,22 @@ public class Utils extends Constants{
 			acceptNextAlert = true;
 		}
 	}
-	public static void createScreenshot(WebDriver driver,String testName,String imageName) {
-		
+	public static void deleteScreenshot(String testName) {
+	    String imagesLocation;
+
+        imagesLocation = (new File("")).getAbsolutePath().concat("\\screenShot\\");
+        
+        File f = new File(imagesLocation +  testName);
+        File[] fList = f.listFiles();
+        for(File fl:fList) {
+        	fl.delete();
+        }
+        
+	}
+	
+	
+	public static String createScreenshot(WebDriver driver,String testName,String imageName) {
+
 		waitingTime(500);
 		
 	    String imagesLocation;
@@ -124,11 +147,23 @@ public class Utils extends Constants{
             WebDriver augmentedDriver = new Augmenter().augment(driver);
             File scrFile = ((TakesScreenshot)augmentedDriver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File(filename).getAbsoluteFile(), true);
+			return "file:///"+filename;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+        return null;
 
 	}
+    public static void openDirectory(String path) {
+        try {
+            java.awt.Desktop.getDesktop().open(new java.io.File(path));
+        } catch (java.io.IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public static int row = 0;
 
 }

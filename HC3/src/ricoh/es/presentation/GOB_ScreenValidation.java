@@ -1,7 +1,10 @@
 package ricoh.es.presentation;
 
 
+
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +15,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import ricoh.es.presentation.utils.Utils;
+import ricoh.es.presentation.utils.*;
 
 public class GOB_ScreenValidation extends Utils {
 	
@@ -40,6 +43,7 @@ public class GOB_ScreenValidation extends Utils {
 				ob[i][2] = minute[i];
 			}
 
+			
 		 this.browser = context.getCurrentXmlTest().getParameter("browser");
 		 this.url = context.getCurrentXmlTest().getParameter("url");
 		 
@@ -54,58 +58,187 @@ public class GOB_ScreenValidation extends Utils {
 	
 		return ob;
 	}
+	/*
+	String time;
+	String suitcase;
+	String testcase;
+	String step;
+	String result;
+	String errorMsg;
+	String screenshot;
+	*/
+	private ricoh.es.presentation.utils.Check check;
+	
+	private Excel excel;
+	private String[] steps;
+
+	int nStep = 0;
+	
+	WebDriver driver;
 	
   @Test(dataProvider = "dp",groups = { "Validación pantalla","GOB" })
 	public void screenValidation(String date, String hour, String minute) {
-		WebDriver driver = openBrowser(this.browser);
+	  
+		steps = new String[]{
+				"1. Open '"+this.browser+"' browser and go to '"+this.url+"' url",              
+				"2. Login using user='"+this.user+"' and password='"+this.password+"'",         
+				"3. Menu '"+this.menu+"' is clicked. Submenu '"+this.submenu1+"' is displayed", 
+				"4. Menu '"+this.menu+"' is clicked. Submenu '"+this.submenu2+"' is displayed", 
+				"5. Menu '"+this.menu+"' is clicked. Submenu '"+this.submenu3+"' is displayed", 
+				"6. Menu '"+this.menu+"' is clicked. Submenu '"+this.submenu4+"' is displayed", 
+				"7. Click '"+this.submenu1+"', screen is correctly displayed",                  
+				"8. Filtes 'Data' and 'Hora' are displayed",	                                
+				"9. TextFields 'Data' and 'Hora' are enable",                                   
+				"10. Checklist from results is disabled until a filter is done",	            
+				"11. Click filter option. The values from filter are shown in the graph screen"};
+		
+		Utils.deleteScreenshot(TESTNAME);
+	  
+		initializeExcel();
+	  
+		driver = openBrowser(this.browser);
+		
 		try {
 	
 			WebDriverWait wait = setUp(driver,this.url);
+
 			// Step 1:
-			ricoh.es.domain.Login.submit(wait, this.user, this.password);
-	
-			element = ricoh.es.domain.Menu.checkMenu(wait, this.menu);
+			/**
+			 * 1. Open '#browser#' browser and go to '#url#' url
+			 */
+			check = ricoh.es.domain.Login.submit(wait, this.user, this.password,false);
+			excelReport("Start suitcase screenValidation",
+					"Start testcase screenValidation",check.isError(),nStep++,true,check.getMsgError());
+			Assert.assertFalse(check.isError(), "Browser is not correctly opened");
 			
+			check.getElement().click();
+			
+			/**
+			 * 2. Login using user='#user#' and password='#password#'
+			 */
+			check = ricoh.es.domain.Select.element(wait, By.linkText(this.menu), false);
+			excelReport(null,null,check.isError(),nStep++,true,check.getMsgError());
+			Assert.assertFalse(check.isError(), "Login is not possible");
+
 			// Step 2:	
-			element.click();
-
-			ricoh.es.domain.Menu.checkSubmenu(wait, new String[] {this.submenu1,this.submenu2,this.submenu3,this.submenu4});
+			check.getElement().click();
+		
+			/**
+			 * 3-6. Menu '#menu#' is clicked. Submenu '#submenu#' is displayed 
+			 */
+			String[] submenus = new String[]{this.submenu1,this.submenu2,this.submenu3,this.submenu4};
+			for (String submenu : submenus) {
+				check = ricoh.es.domain.Select.element(wait, By.linkText(submenu), false);
 	
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("frmFrame")));
+				excelReport(null,null,check.isError(),nStep++,true,check.getMsgError());
+				Assert.assertFalse(check.isError(), "Submenu '"+submenu+"' is not shown");
+			}
+	
 			// Step 3:	
-
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(this.submenu1)));
-			element.click();
-			
-			Utils.createScreenshot(driver,TESTNAME,this.submenu1);
-			
+			/**
+			 * 7. Click '#submenu1#', screen is correctly displayed 
+			 */
+			check = ricoh.es.domain.Select.element(wait, By.linkText(this.submenu1), true);
+			excelReport(null,null,check.isError(),nStep++,true,check.getMsgError());
+			Assert.assertFalse(check.isError(), "Screen from submenu '"+this.submenu1+"' is not displayed");
+	
+			/********************************************************************************
+			 * A webview is displayed into another webview. It goes to the internal webview */
 			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("frmFrame")));
-			Assert.assertTrue(element.isDisplayed());
 			driver.get(element.getAttribute("src"));
-
+			/********************************************************************************/
+	
 			// Step 4:
-			ricoh.es.domain.Filter.setAndCheck(wait, date, hour, minute);
-			
+			/**
+			 * 8. Filtes 'Data' and 'Hora' are displayed
+			 */
+			check = ricoh.es.domain.Filter.setAndCheck(wait, date, hour, minute,false);
+			excelReport(null,null,check.isError(),nStep++,true,check.getMsgError());
+			Assert.assertFalse(check.isError(), "Filtes 'Data' and 'Hora' aren't displayed");
+	
+			/**
+			 * 9. TextFields 'Data' and 'Hora' are enable
+			 */
+			boolean areDisabled = !(ricoh.es.domain.Select.element(wait, By.id("dataFrom"), false).getElement().isEnabled()
+					&& ricoh.es.domain.Select.element(wait, By.id("horaFrom"), false).getElement().isEnabled());
+			excelReport(null,null,areDisabled,nStep++,true,"TextFields 'Data' or/and 'Hora' aren't enable");
+			Assert.assertFalse(check.isError(), "TextFields 'Data' or/and 'Hora' aren't enable");
 
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"control1\"]/div/div/div")));
-			String testName = "graphyc_before_"+"aria-disabled="+element.getAttribute("aria-disabled")+"_"+date.replace("/", "")+"_"+hour;
-			Utils.createScreenshot(driver,TESTNAME,testName);
+			check = ricoh.es.domain.Select.element(wait,By.xpath("//*[@id=\"control1\"]/div/div/div"), false);
+
+			/**
+			 * 10. Checklist from results is disabled until a filter is done
+			 */
+			boolean isEnable = !(Boolean.parseBoolean(check.getElement().getAttribute("aria-disabled")));
+			excelReport(null,null,isEnable,nStep++,true,"Result checklist isnt't disable");
+			Assert.assertFalse(check.isError(), "Result checklist isnt't disable");
 			
 			// Step 5:
-		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ibtFiltra")));
-		    element.click();
-		    
-		    
-		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("control1")));
 	
-			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"control1\"]/div/div/div")));
-
-			testName = "graphyc_after_"+"aria-disabled="+element.getAttribute("aria-disabled")+"_"+date.replace("/", "")+"_"+hour;
-			Utils.createScreenshot(driver,TESTNAME,testName);
-	
+			/**
+			 * 11. Click filter option. The values from filter are shown in a graph screen
+			 */
+			check = ricoh.es.domain.Select.element(wait,By.id("ibtFiltra"), true);
+			excelReport(null,null,false,nStep++,false,null);
+			
 
 		} finally {
 			closeBrowser(driver, false);
+			
+			Utils.openDirectory(PATH_DESTIN);
+		}
+  }
+  public void initializeExcel() {
+		excel = new Excel(PATH_ORIGIN, PATH_DESTIN, SHEET);
+		
+		String[] results = {OK,FAIL,BLOKED,SEE_IMAGE};
+		int[] color = {	IndexedColors.GREEN.index,
+						IndexedColors.RED.index,
+						IndexedColors.VIOLET.index,
+						IndexedColors.ORANGE.index};
+		excel.setColorToCell(results, color, "E2:E200", SHEET);
+		excel.setColorToCell(new String[] {""}, new int[] {IndexedColors.LIGHT_YELLOW.index}, "B2:C200", SHEET,false);
+
+  }
+
+  public void excelReport(String suitcase,String testcase,boolean error,int nStep,boolean ckeckError,String errorMsg) {
+	  
+		String step;
+		String result;
+		String screenshot;
+
+		if(suitcase==null) {
+			suitcase = "";
+		} 
+		if(testcase==null) {
+			testcase = "";
+		} 
+		step = steps[nStep++];//9. Checklist from results is disabled until a filter is done
+		
+		if(!ckeckError) {
+			result = SEE_IMAGE;
+			errorMsg = "";
+			screenshot = Utils.createScreenshot(driver,TESTNAME,"image"+nStep);
+		}else if(error) {
+			result = FAIL;
+			screenshot = Utils.createScreenshot(driver,TESTNAME,"image"+nStep+"_fail");
+		}else {
+			result = OK;
+			errorMsg = "";
+			screenshot = Utils.createScreenshot(driver,TESTNAME,"image"+nStep+"_ok");
+		}
+		
+	
+		excel.writeCol(++row, 0, 
+				new Object[]{Utils.currentTime("yyyy-MM-dd HH:mm:ss.SSS"),
+						suitcase,testcase,step,result,errorMsg,screenshot}, SHEET);
+		
+		if(error && ckeckError) {
+			for(int i = (row+1);i<steps.length;i++) {
+				excel.writeCol(++row, 0, 
+						new Object[]{Utils.currentTime("yyyy-MM-dd HH:mm:ss.SSS"),
+								null,null,steps[i],BLOKED,null,""}, SHEET);
+			}
 		}
   }
 

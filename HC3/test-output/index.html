@@ -23,7 +23,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -37,7 +37,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-GOB">
-              <span class="suite-name border-failed">GOB</span>
+              <span class="suite-name border-passed">GOB</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -90,26 +90,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 2 failed,   </span>
+                    <span class="method-stats">1 method,   1 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-GOB" class="hide-methods failed suite-GOB"> (hide)</a> <!-- hide-methods failed suite-GOB -->
-                      <a href="#" panel-name="suite-GOB" class="show-methods failed suite-GOB"> (show)</a> <!-- show-methods failed suite-GOB -->
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-GOB" class="hide-methods passed suite-GOB"> (hide)</a> <!-- hide-methods passed suite-GOB -->
+                      <a href="#" panel-name="suite-GOB" class="show-methods passed suite-GOB"> (show)</a> <!-- show-methods passed suite-GOB -->
                     </span>
-                    <div class="method-list-content failed suite-GOB">
+                    <div class="method-list-content passed suite-GOB">
                       <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-GOB" title="ricoh.es.presentation.GOB_ScreenValidation" hash-for-method="screenValidation(11/06/2018, 12, )">screenValidation(11/06/2018, 12, )</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="failed.png"/>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-GOB" title="ricoh.es.presentation.GOB_ScreenValidation" hash-for-method="screenValidation(07/06/2018, 13, )">screenValidation(07/06/2018, 13, )</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-GOB -->
+                    </div> <!-- method-list-content passed suite-GOB -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -121,66 +116,22 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-GOB" class="panel GOB">
-          <div class="suite-GOB-class-failed">
+          <div class="suite-GOB-class-passed">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
+              <img src="passed.png"/>
               <span class="class-name">ricoh.es.presentation.GOB_ScreenValidation</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="screenValidation(11/06/2018, 12, )">
-                  </a> <!-- screenValidation(11/06/2018, 12, ) -->
-                  <span class="method-name">screenValidation</span>
-                  <span class="parameters">(11/06/2018, 12, )</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: Failed to decode response from marionette
-Build info: version: &apos;3.12.0&apos;, revision: &apos;7c6e0b3&apos;, time: &apos;2018-05-08T14:04:26.12Z&apos;
-System info: host: &apos;ESBCN01L5PVLHM2&apos;, ip: &apos;10.144.94.84&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_171&apos;
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 60.0.2, javascriptEnabled: true, moz:accessibilityChecks: false, moz:headless: false, moz:processID: 10716, moz:profile: C:\Users\Agusti.Blasi\AppDa..., moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: XP, platformName: XP, platformVersion: 10.0, rotatable: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}}
-Session ID: d58a2dd5-492b-482c-b323-e002fbe4256a
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:543)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:600)
-	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:433)
-	at ricoh.es.presentation.utils.Utils.closeBrowser(Utils.java:56)
-	at ricoh.es.presentation.GOB_ScreenValidation.screenValidation(GOB_ScreenValidation.java:108)
-... Removed 28 stack frames
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="screenValidation(07/06/2018, 13, )">
                   </a> <!-- screenValidation(07/06/2018, 13, ) -->
                   <span class="method-name">screenValidation</span>
                   <span class="parameters">(07/06/2018, 13, )</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: Failed to decode response from marionette
-Build info: version: &apos;3.12.0&apos;, revision: &apos;7c6e0b3&apos;, time: &apos;2018-05-08T14:04:26.12Z&apos;
-System info: host: &apos;ESBCN01L5PVLHM2&apos;, ip: &apos;10.144.94.84&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_171&apos;
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 60.0.2, javascriptEnabled: true, moz:accessibilityChecks: false, moz:headless: false, moz:processID: 8760, moz:profile: C:\Users\Agusti.Blasi\AppDa..., moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: XP, platformName: XP, platformVersion: 10.0, rotatable: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}}
-Session ID: 7ae3f8b5-9aa0-4064-bcd1-47f15a0dfa11
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:543)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:600)
-	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:433)
-	at ricoh.es.presentation.utils.Utils.closeBrowser(Utils.java:56)
-	at ricoh.es.presentation.GOB_ScreenValidation.screenValidation(GOB_ScreenValidation.java:108)
-... Removed 28 stack frames
-</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-GOB-class-failed -->
+          </div> <!-- suite-GOB-class-passed -->
         </div> <!-- panel GOB -->
         <div panel-name="test-xml-GOB" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -191,18 +142,18 @@ Session ID: 7ae3f8b5-9aa0-4064-bcd1-47f15a0dfa11
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;GOB&quot;&gt;
-  &lt;parameter name=&quot;browser&quot; value=&quot;firefox&quot;/&gt;
+  &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
   &lt;parameter name=&quot;url&quot; value=&quot;https://lpscwai01.localdomain/HC3-GOV/gov&quot;/&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;TestCase 1&quot;&gt;
-    &lt;parameter name=&quot;date&quot; value=&quot;11/06/2018,07/06/2018&quot;/&gt;
+    &lt;parameter name=&quot;date&quot; value=&quot;07/06/2018&quot;/&gt;
     &lt;parameter name=&quot;password&quot; value=&quot;EVERIS_12&quot;/&gt;
-    &lt;parameter name=&quot;hour&quot; value=&quot;12,13&quot;/&gt;
+    &lt;parameter name=&quot;hour&quot; value=&quot;13&quot;/&gt;
     &lt;parameter name=&quot;submenu1&quot; value=&quot;Indicador servei web&quot;/&gt;
     &lt;parameter name=&quot;submenu2&quot; value=&quot;Indicador visor professional&quot;/&gt;
     &lt;parameter name=&quot;menu&quot; value=&quot;INDICADORS&quot;/&gt;
     &lt;parameter name=&quot;user&quot; value=&quot;ROQUE&quot;/&gt;
     &lt;parameter name=&quot;submenu3&quot; value=&quot;Indicador visor ciutadà&quot;/&gt;
-    &lt;parameter name=&quot;minute&quot; value=&quot;,&quot;/&gt;
+    &lt;parameter name=&quot;minute&quot; value=&quot;&quot;/&gt;
     &lt;parameter name=&quot;submenu4&quot; value=&quot;Indicador publicació&quot;/&gt;
     &lt;groups&gt;
       &lt;run&gt;
@@ -267,20 +218,16 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'screenValidation')
 data.setCell(0, 2, 'ricoh.es.presentation.GOB_ScreenValidation')
-data.setCell(0, 3, 14933);
-data.setCell(1, 0, 1)
-data.setCell(1, 1, 'screenValidation')
-data.setCell(1, 2, 'ricoh.es.presentation.GOB_ScreenValidation')
-data.setCell(1, 3, 4153);
+data.setCell(0, 3, 36315);
 window.suiteTableData['GOB']= { tableData: data, tableDiv: 'times-div-GOB'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 19 seconds</span>
+              <span class="suite-total-time">Total running time: 36 seconds</span>
               <div id="times-div-GOB">
               </div> <!-- times-div-GOB -->
             </div> <!-- times-div -->
@@ -308,16 +255,8 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">ricoh.es.presentation.GOB_ScreenValidation</div> <!-- chronological-class-name -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">screenValidation(11/06/2018, 12, )</span>
-                <span class="method-start">0 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">screenValidation(07/06/2018, 13, )</span>
-                <span class="method-start">14941 ms</span>
+                <span class="method-start">0 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
